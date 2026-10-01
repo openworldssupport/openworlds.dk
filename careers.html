@@ -3,37 +3,487 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenWorlds Careers Portal</title>
+  <title>Careers | OpenWorlds</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    .ow-logo { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; }
+    :root {
+      --ow-blue: #0066cc;
+      --ow-blue-dark: #0b2f5f;
+      --ow-blue-soft: #eaf3ff;
+      --ow-surface: #ffffff;
+      --ow-text: #1d2433;
+      --ow-muted: #5f6f86;
+      --ow-border: rgba(13, 51, 98, 0.12);
+      --ow-shadow: 0 18px 45px rgba(17, 52, 96, 0.12);
+      --ow-success: #1a8f5a;
+      --ow-warn: #ffb703;
+    }
+
+    body {
+      background: linear-gradient(180deg, #f5f9ff 0%, #edf4ff 100%);
+      color: var(--ow-text);
+    }
+
+    .ow-logo { width: 42px; height: 42px; border-radius:10px; object-fit:cover; }
     .brand-wrap { display:flex; align-items:center; gap:.8rem; }
-    .careers-hero { background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue)); color: #fff; padding: 80px 20px; }
-    .careers-layout { display:grid; grid-template-columns: 320px 1fr; gap: 2rem; padding: 40px 20px 80px; }
-    .side-nav { background:#fff; border:1px solid #dfe7f5; border-radius:12px; padding:1rem; position:sticky; top:90px; height:fit-content; }
-    .side-nav h3 { color:var(--primary-blue); margin-bottom:1rem; font-size:1rem; }
-    .side-nav a { display:block; padding:.7rem .8rem; color:var(--dark-gray); text-decoration:none; border-radius:8px; margin-bottom:.35rem; font-size:.95rem; }
-    .side-nav a:hover { background:var(--light-blue); color:var(--primary-blue); }
-    .volunteer-notice { background:#fff; border-left:5px solid var(--primary-blue); border-radius:12px; padding:1.5rem; margin-bottom:2rem; box-shadow:0 2px 8px rgba(0,0,0,.06); }
-    .branch-section { margin-bottom:2rem; background:#fff; border:1px solid #dfe7f5; border-radius:14px; overflow:hidden; }
-    .branch-header { padding:1.25rem 1.5rem; background:linear-gradient(135deg,#f5f9ff,#eef5ff); border-bottom:1px solid #dfe7f5; }
-    .branch-header h2 { color:var(--primary-blue); font-size:1.35rem; margin-bottom:.35rem; }
-    .branch-header p { color:var(--text-gray); margin:0; }
-    .role-list { padding:1.25rem; display:grid; gap:1rem; }
-    .role-card { border:1px solid #e5ebf6; border-radius:12px; padding:1rem; display:grid; gap:.75rem; }
-    .role-top { display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:flex-start; }
-    .role-top h3 { margin:0; font-size:1.1rem; color:var(--dark-gray); }
-    .status-badge { padding:.35rem .65rem; border-radius:999px; font-size:.8rem; font-weight:700; }
-    .status-open { background:#e9f9ef; color:#1d7f46; }
-    .status-limited { background:#fff4db; color:#9a6a00; }
-    .status-waitlist { background:#eef2ff; color:#4451c2; }
-    .status-closed { background:#fdecec; color:#b42318; }
-    .role-meta { display:flex; flex-wrap:wrap; gap:.75rem; color:var(--text-gray); font-size:.9rem; }
-    .role-actions { display:flex; gap:.75rem; flex-wrap:wrap; }
-    .btn-link { display:inline-block; padding:.75rem 1rem; border-radius:8px; text-decoration:none; font-weight:600; }
-    .btn-primary-link { background:var(--primary-blue); color:#fff; }
-    .btn-secondary-link { background:var(--light-blue); color:var(--primary-blue); }
-    @media (max-width: 900px) { .careers-layout { grid-template-columns: 1fr; } .side-nav { position:static; } }
+
+    .careers-hero {
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.18), transparent 38%),
+                  linear-gradient(135deg, var(--ow-blue) 0%, #0d4da1 38%, var(--ow-blue-dark) 100%);
+      color: #fff;
+      padding: 72px 20px 84px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .careers-hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -12% -25% auto;
+      width: 420px;
+      height: 420px;
+      background: rgba(255,255,255,0.09);
+      border-radius: 50%;
+      filter: blur(8px);
+    }
+
+    .careers-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .careers-hero h1 {
+      font-size: clamp(2.4rem, 5vw, 5rem);
+      margin-bottom: 1rem;
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .careers-hero p {
+      max-width: 760px;
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 30px;
+      padding: 0.95rem 1.5rem;
+      font-weight: 700;
+      transition: all 0.25s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 0.98rem;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: var(--ow-blue);
+      box-shadow: 0 12px 28px rgba(13, 40, 79, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+      max-width: 760px;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 1rem 1.2rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.6rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-card span {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.92rem;
+    }
+
+    .careers-wrap {
+      padding: 80px 20px 60px;
+    }
+
+    .intro-box {
+      max-width: 980px;
+      margin: 0 auto 3rem;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--ow-border);
+      border-radius: 24px;
+      box-shadow: var(--ow-shadow);
+      padding: 2rem;
+    }
+
+    .intro-box h2 {
+      font-size: clamp(1.7rem, 2vw, 2.6rem);
+      margin-bottom: 0.75rem;
+      color: var(--ow-blue-dark);
+    }
+
+    .intro-box p {
+      font-size: 1.06rem;
+      line-height: 1.75;
+      color: var(--ow-muted);
+    }
+
+    .roles-grid {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .role-card {
+      background: var(--ow-surface);
+      border: 1px solid var(--ow-border);
+      border-radius: 22px;
+      padding: 1.6rem;
+      box-shadow: var(--ow-shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .role-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 50px rgba(17, 52, 96, 0.16);
+    }
+
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--ow-blue-soft);
+      color: var(--ow-blue);
+      font-weight: 700;
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.7rem;
+      margin-bottom: 1rem;
+    }
+
+    .role-card h3 {
+      font-size: 1.7rem;
+      margin-bottom: 0.65rem;
+      color: var(--ow-blue-dark);
+    }
+
+    .role-card p {
+      color: var(--ow-muted);
+      line-height: 1.7;
+      margin-bottom: 1.1rem;
+    }
+
+    .role-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      background: #f6f8fc;
+      color: var(--ow-text);
+      padding: 0.45rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: 1px solid rgba(13, 51, 98, 0.08);
+    }
+
+    .role-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.4rem;
+      display: grid;
+      gap: 0.58rem;
+      color: var(--ow-muted);
+      font-size: 0.96rem;
+    }
+
+    .role-card li::before {
+      content: "•";
+      color: var(--ow-blue);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: 0;
+    }
+
+    .apply-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      color: var(--ow-blue);
+      text-decoration: none;
+    }
+
+    .apply-link:hover { text-decoration: underline; }
+
+    .process {
+      max-width: 1180px;
+      margin: 4.5rem auto 0;
+      padding: 2rem 0 0;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3vw, 3rem);
+      margin-bottom: 0.9rem;
+      color: var(--ow-blue-dark);
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--ow-muted);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .process-step {
+      background: var(--ow-surface);
+      border: 1px solid var(--ow-border);
+      border-radius: 20px;
+      padding: 1.5rem 1.2rem;
+      box-shadow: var(--ow-shadow);
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--ow-blue-soft);
+      color: var(--ow-blue);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .process-step h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--ow-blue-dark);
+    }
+
+    .process-step p {
+      color: var(--ow-muted);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    .apply-section {
+      max-width: 1180px;
+      margin: 4.5rem auto 0;
+      background: var(--ow-surface);
+      border: 1px solid var(--ow-border);
+      border-radius: 28px;
+      box-shadow: var(--ow-shadow);
+      padding: 2rem;
+    }
+
+    .apply-shell {
+      display: grid;
+      grid-template-columns: 1.1fr 1.4fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .apply-copy {
+      padding: 0.4rem 0.4rem 0.4rem 0;
+    }
+
+    .apply-copy h2 {
+      font-size: clamp(2rem, 3vw, 3rem);
+      margin-bottom: 0.8rem;
+      color: var(--ow-blue-dark);
+    }
+
+    .apply-copy p {
+      color: var(--ow-muted);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1.3rem;
+    }
+
+    .mini-item {
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+      color: var(--ow-text);
+      background: #f8fbff;
+      border: 1px solid var(--ow-border);
+      border-radius: 16px;
+      padding: 0.9rem 1rem;
+    }
+
+    .mini-item i {
+      color: var(--ow-blue);
+      font-size: 1.1rem;
+      margin-top: 0.18rem;
+    }
+
+    .application-form {
+      background: linear-gradient(180deg, #fbfdff 0%, #f4f8ff 100%);
+      border: 1px solid var(--ow-border);
+      border-radius: 22px;
+      padding: 1.7rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ow-muted);
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid rgba(13, 51, 98, 0.15);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--ow-text);
+      padding: 0.9rem 1rem;
+      font: inherit;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: rgba(0,102,204,0.5);
+      box-shadow: 0 0 0 4px rgba(0,102,204,0.08);
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .submit-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .tiny-note {
+      color: var(--ow-muted);
+      font-size: 0.8rem;
+    }
+
+    .apply-btn {
+      background: linear-gradient(135deg, var(--ow-blue) 0%, #0d4da1 100%);
+      color: #fff;
+      border-radius: 14px;
+      padding: 0.9rem 1.4rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 980px) {
+      .roles-grid,
+      .process-grid,
+      .apply-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .careers-hero {
+        padding-top: 60px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -45,8 +495,8 @@
       </div>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#about">About</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
         <li><a href="careers.html">Careers</a></li>
         <li><a href="community.html">Community</a></li>
       </ul>
@@ -55,127 +505,214 @@
 
   <section class="careers-hero">
     <div class="container">
-      <h1>OpenWorlds Careers Portal</h1>
-      <p>Explore branches, review position details, and apply to help shape the future of OpenWorlds.</p>
+      <div class="eyebrow"><i class="fas fa-rocket"></i> Build what comes next</div>
+      <h1>Join the OpenWorlds crew.</h1>
+      <p>
+        We are building a creator-first platform where imagination becomes playable experiences.
+        If you want to help shape communities, tools, and worlds that people actually love, we want to hear from you.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#apply" class="btn btn-primary">Apply now</a>
+        <a href="#roles" class="btn btn-secondary">View roles</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <strong>3</strong>
+          <span>core roles open</span>
+        </div>
+        <div class="stat-card">
+          <strong>100%</strong>
+          <span>remote-friendly</span>
+        </div>
+        <div class="stat-card">
+          <strong>1</strong>
+          <span>big mission</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="container careers-layout">
-    <aside class="side-nav">
-      <h3>Branches</h3>
-      <a href="#executive">Executive Leadership</a>
-      <a href="#engineering">Engineering & Software Development</a>
-      <a href="#design">Game Design & Systems Architecture</a>
-      <a href="#creative">Creative Content & Art Production</a>
-      <a href="#community-ops">Community Operations & Player Engagement</a>
-      <a href="#safety">Trust & Safety / Moderation</a>
-      <a href="#data">Data Science, Analytics & Research</a>
-      <a href="#ai">Artificial Intelligence & Procedural Systems</a>
-      <a href="#operations">Operations & Internal Systems</a>
-      <a href="#marketing">Marketing & Growth</a>
-      <a href="#business">Business Development & Strategy</a>
-      <a href="#legal">Legal & Policy</a>
-    </aside>
+  <section class="careers-wrap">
+    <div class="intro-box">
+      <h2>We are building the future of user-generated worlds.</h2>
+      <p>
+        OpenWorlds is a collaborative platform for creators, communities, and players who want to shape digital experiences together.
+        We are looking for people who care about quality, creativity, and helping others turn ideas into something real.
+      </p>
+    </div>
 
-    <main>
-      <div class="volunteer-notice">
-        <h2>Voluntary Contributor Notice</h2>
-        <p>OpenWorlds is built as a community-driven UGC game platform in active development.</p>
-        <p>All positions listed within the Careers Portal are voluntary contributor roles.</p>
-        <p>By applying for a position, applicants are choosing to take part in building and shaping OpenWorlds because they are interested in contributing to the platform, its systems, and its community.</p>
-        <p>These roles are not traditional employment positions and do not include salaries, wages, or employment contracts.</p>
-        <p>Instead, OpenWorlds contributors join out of interest in collaboration, creativity, and participation in building a large-scale game platform.</p>
-        <p>We value contribution, initiative, and commitment from individuals who want to be part of shaping the future of OpenWorlds.</p>
+    <div id="roles" class="roles-grid">
+      <article class="role-card">
+        <div class="role-badge">Design</div>
+        <h3>Game Designer</h3>
+        <p>Shape core gameplay loops, progression systems, and player experiences that are intuitive and memorable.</p>
+        <div class="role-meta">
+          <span class="chip"><i class="fas fa-clock"></i> Flexible</span>
+          <span class="chip"><i class="fas fa-globe"></i> Remote</span>
+        </div>
+        <ul>
+          <li>Design systems that support creator expression</li>
+          <li>Prototype gameplay ideas and improve flow</li>
+          <li>Balance challenge, reward, and progression</li>
+        </ul>
+        <a href="#apply" class="apply-link">Apply for this role <i class="fas fa-arrow-right"></i></a>
+      </article>
+
+      <article class="role-card">
+        <div class="role-badge">Build</div>
+        <h3>Frontend Engineer</h3>
+        <p>Build clean, responsive experiences that help creators and communities move quickly and confidently.</p>
+        <div class="role-meta">
+          <span class="chip"><i class="fas fa-clock"></i> Flexible</span>
+          <span class="chip"><i class="fas fa-code"></i> Product</span>
+        </div>
+        <ul>
+          <li>Develop polished UI and interactions</li>
+          <li>Improve accessibility and performance</li>
+          <li>Work closely with design and product teams</li>
+        </ul>
+        <a href="#apply" class="apply-link">Apply for this role <i class="fas fa-arrow-right"></i></a>
+      </article>
+
+      <article class="role-card">
+        <div class="role-badge">Community</div>
+        <h3>Community Lead</h3>
+        <p>Grow a positive, active, and welcoming creator community that helps OpenWorlds evolve with real feedback.</p>
+        <div class="role-meta">
+          <span class="chip"><i class="fas fa-users"></i> People</span>
+          <span class="chip"><i class="fas fa-globe"></i> Global</span>
+        </div>
+        <ul>
+          <li>Guide creators, events, and engagement</li>
+          <li>Support onboarding and community health</li>
+          <li>Build feedback loops for product growth</li>
+        </ul>
+        <a href="#apply" class="apply-link">Apply for this role <i class="fas fa-arrow-right"></i></a>
+      </article>
+    </div>
+
+    <div class="process">
+      <h2 class="section-title">How we work</h2>
+      <p class="section-subtitle">We keep the process simple, thoughtful, and collaborative so great people can join quickly.</p>
+
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <h3>Apply</h3>
+          <p>Send us a short introduction and tell us what type of work you want to build with us.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <h3>Review</h3>
+          <p>We look at your skills, interests, and potential fit for the role and the platform.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <h3>Chat</h3>
+          <p>We talk through your goals, strengths, and how you could contribute to the OpenWorlds mission.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">4</div>
+          <h3>Start</h3>
+          <p>Once accepted, you join a collaborative team building something meaningful and ambitious.</p>
+        </div>
       </div>
+    </div>
 
-      <section id="executive" class="branch-section">
-        <div class="branch-header"><h2>Executive Leadership Branch</h2><p>Strategic governance, senior operational guidance, and long-term platform direction.</p></div>
-        <div class="role-list">
-          <article class="role-card"><div class="role-top"><div><h3>Executive Strategic & Advisory Board</h3><div class="role-meta"><span>Department: Executive Leadership Branch</span></div></div></div></article>
-          <article class="role-card"><div class="role-top"><div><h3>Chief Technical Officer (CTO)</h3><div class="role-meta"><span>Department: Executive Leadership Branch</span></div></div></div></article>
-          <article class="role-card"><div class="role-top"><div><h3>Chief Operating Officer (COO)</h3><div class="role-meta"><span>Department: Executive Leadership Branch</span></div></div></div></article>
-          <article class="role-card"><div class="role-top"><div><h3>Chief Financial Officer (CFO)</h3><div class="role-meta"><span>Department: Executive Leadership Branch</span></div></div></div></article>
-          <article class="role-card"><div class="role-top"><div><h3>Chief Marketing Officer (CMO)</h3><div class="role-meta"><span>Department: Executive Leadership Branch</span></div></div></div></article>
-        </div>
-      </section>
+    <section id="apply" class="apply-section">
+      <div class="apply-shell">
+        <div class="apply-copy">
+          <h2>Apply to OpenWorlds</h2>
+          <p>
+            We are looking for people who are passionate, practical, and excited to help build a platform for creators and communities.
+            Share a little about yourself and the kind of impact you want to make.
+          </p>
 
-      <section id="engineering" class="branch-section"><div class="branch-header"><h2>Engineering & Software Development Branch</h2><p>Core systems, web infrastructure, platform services, and technical excellence.</p></div>
-        <div class="role-list">
-          <article class="role-card"><div class="role-top"><div><h3>Backend Platform Engineer</h3><div class="role-meta"><span>Department: Engineering & Software Development Branch</span></div></div></div></article>
-          <article class="role-card"><div class="role-top"><div><h3>Frontend Platform Engineer</h3><div class="role-meta"><span>Department: Engineering & Software Development Branch</span></div></div></div></article>
+          <div class="mini-list">
+            <div class="mini-item">
+              <i class="fas fa-star"></i>
+              <div>We value initiative, creativity, and thoughtful collaboration.</div>
+            </div>
+            <div class="mini-item">
+              <i class="fas fa-briefcase"></i>
+              <div>Most roles are flexible, remote-friendly, and built around real contribution.</div>
+            </div>
+            <div class="mini-item">
+              <i class="fas fa-heart"></i>
+              <div>We care about making a community where people feel welcomed and empowered.</div>
+            </div>
+          </div>
         </div>
-      </section>
 
-      <section id="design" class="branch-section"><div class="branch-header"><h2>Game Design & Systems Architecture Branch</h2><p>Gameplay design, platform systems thinking, progression, and experience design.</p></div>
-        <div class="role-list">
-          <article class="role-card"><div class="role-top"><div><h3>Systems Designer</h3><div class="role-meta"><span>Department: Game Design & Systems Architecture Branch</span></div></div></div></article>
-        </div>
-      </section>
+        <form class="application-form">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" type="text" placeholder="Your name" />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="you@example.com" />
+            </div>
+            <div class="field">
+              <label for="role">Role</label>
+              <select id="role">
+                <option>Game Designer</option>
+                <option>Frontend Engineer</option>
+                <option>Community Lead</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="availability">Availability</label>
+              <input id="availability" type="text" placeholder="e.g. 10-15 hrs/week" />
+            </div>
+            <div class="field full">
+              <label for="message">Why OpenWorlds?</label>
+              <textarea id="message" placeholder="Tell us about your background, what excites you, and what you want to help build."></textarea>
+            </div>
+          </div>
 
-      <section id="creative" class="branch-section"><div class="branch-header"><h2>Creative Content & Art Production Branch</h2><p>Visual identity, assets, environments, UI art, and creative production.</p></div>
-        <div class="role-list">
-          <article class="role-card"><div class="role-top"><div><h3>Concept Artist</h3><div class="role-meta"><span>Department: Creative Content & Art Production Branch</span></div></div></div></article>
-        </div>
-      </section>
-
-      <section id="community-ops" class="branch-section"><div class="branch-header"><h2>Community Operations & Player Engagement Branch</h2><p>Community health, contributor support, communication, and engagement strategy.</p></div>
-        <div class="role-list">
-          <article class="role-card"><div class="role-top"><div><h3>Community Operations Coordinator</h3><div class="role-meta"><span>Department: Community Operations & Player Engagement Branch</span></div></div></div></article>
-        </div>
-      </section>
-
-      <section id="safety" class="branch-section"><div class="branch-header"><h2>Trust & Safety / Moderation Branch</h2><p>Player safety, moderation standards, escalation handling, and healthy community culture.</p></div>
-        <div class="role-list">
-          <article class="role-card"><div class="role-top"><div><h3>Trust & Safety Analyst</h3><div class="role-meta"><span>Department: Trust & Safety / Moderation Branch</span></div></div></div></article>
-        </div>
-      </section>
-
-      <section id="data" class="branch-section"><div class="branch-header"><h2>Data Science, Analytics & Research Branch</h2><p>Platform insight, contributor research, user behavior analysis, and metrics.</p></div>
-        <div class="role-list">
-          <article class="role-card"><div class="role-top"><div><h3>Product Data Analyst</h3><div class="role-meta"><span>Department: Data Science, Analytics & Research Branch</span></div></div></div></article>
-        </div>
-      </section>
-
-      <section id="ai" class="branch-section"><div class="branch-header"><h2>Artificial Intelligence & Procedural Systems Branch</h2><p>Intelligent systems research, automation experimentation, and procedural content.</p></div>
-        <div class="role-list">
-          <article class="role-card"><div class="role-top"><div><h3>Procedural Systems Developer</h3><div class="role-meta"><span>Department: Artificial Intelligence & Procedural Systems Branch</span></div></div></div></article>
-        </div>
-      </section>
-
-      <section id="operations" class="branch-section"><div class="branch-header"><h2>Operations & Internal Systems Branch</h2><p>Internal documentation, contributor workflows, systems organization, and tooling.</p></div>
-        <div class="role-list">
-          <article class="role-card"><div class="role-top"><div><h3>Documentation & Workflow Specialist</h3><div class="role-meta"><span>Department: Operations & Internal Systems Branch</span></div></div></div></article>
-        </div>
-      </section>
-
-      <section id="marketing" class="branch-section"><div class="branch-header"><h2>Marketing & Growth Branch</h2><p>Positioning, content growth, platform storytelling, and audience expansion.</p></div>
-        <div class="role-list">
-          <article class="role-card"><div class="role-top"><div><h3>Growth Content Strategist</h3><div class="role-meta"><span>Department: Marketing & Growth Branch</span></div></div></div></article>
-        </div>
-      </section>
-
-      <section id="business" class="branch-section"><div class="branch-header"><h2>Business Development & Strategy Branch</h2><p>Partnership thinking, platform positioning, business opportunity analysis, and deals.</p></div>
-        <div class="role-list">
-          <article class="role-card"><div class="role-top"><div><h3>Business Strategy Associate</h3><div class="role-meta"><span>Department: Business Development & Strategy Branch</span></div></div></div></article>
-        </div>
-      </section>
-
-      <section id="legal" class="branch-section"><div class="branch-header"><h2>Legal & Policy Branch</h2><p>Policy drafting support, trust standards, governance materials, and platform compliance.</p></div>
-        <div class="role-list">
-          <article class="role-card"><div class="role-top"><div><h3>Policy Research Specialist</h3><div class="role-meta"><span>Department: Legal & Policy Branch</span></div></div></div></article>
-        </div>
-      </section>
-    </main>
+          <div class="submit-row">
+            <div class="tiny-note">We typically respond within 7–10 days.</div>
+            <button type="submit" class="apply-btn">Submit application</button>
+          </div>
+        </form>
+      </div>
+    </section>
   </section>
 
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-section"><div class="brand-wrap"><img src="assets/openworlds-logo.png" alt="OpenWorlds logo" class="ow-logo"><h4>OpenWorlds</h4></div><p>Empowering creators worldwide</p></div>
-        <div class="footer-section"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="careers.html">Careers</a></li><li><a href="community.html">Community</a></li><li><a href="index.html#contact">Support</a></li></ul></div>
-        <div class="footer-section"><h4>Follow Us</h4><div class="social-links"><a href="https://discord.gg/TRJ8ZmBKDS"><i class="fab fa-discord"></i></a><a href="https://www.youtube.com/@Official-OpenWorlds"><i class="fab fa-youtube"></i></a></div></div>
+        <div class="footer-section">
+          <div class="brand-wrap">
+            <img src="assets/openworlds-logo.png" alt="OpenWorlds logo" class="ow-logo">
+            <h4>OpenWorlds</h4>
+          </div>
+          <p>Empowering creators worldwide</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="community.html">Community</a></li>
+            <li><a href="index.html#contact">Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="https://discord.gg/TRJ8ZmBKDS"><i class="fab fa-discord"></i></a>
+            <a href="https://www.youtube.com/@Official-OpenWorlds"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
       </div>
-      <div class="footer-bottom"><p>&copy; 2024 OpenWorlds. All rights reserved.</p></div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 OpenWorlds. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 </body>

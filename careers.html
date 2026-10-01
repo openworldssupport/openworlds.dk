@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenWorlds Careers Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .ow-logo { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; }
+    .brand-wrap { display:flex; align-items:center; gap:.8rem; }
+    .careers-hero { background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue)); color: #fff; padding: 80px 20px; }
+    .careers-layout { display:grid; grid-template-columns: 320px 1fr; gap: 2rem; padding: 40px 20px 80px; }
+    .side-nav { background:#fff; border:1px solid #dfe7f5; border-radius:12px; padding:1rem; position:sticky; top:90px; height:fit-content; }
+    .side-nav h3 { color:var(--primary-blue); margin-bottom:1rem; font-size:1rem; }
+    .side-nav a { display:block; padding:.7rem .8rem; color:var(--dark-gray); text-decoration:none; border-radius:8px; margin-bottom:.35rem; font-size:.95rem; }
+    .side-nav a:hover { background:var(--light-blue); color:var(--primary-blue); }
+    .volunteer-notice { background:#fff; border-left:5px solid var(--primary-blue); border-radius:12px; padding:1.5rem; margin-bottom:2rem; box-shadow:0 2px 8px rgba(0,0,0,.06); }
+    .branch-section { margin-bottom:2rem; background:#fff; border:1px solid #dfe7f5; border-radius:14px; overflow:hidden; }
+    .branch-header { padding:1.25rem 1.5rem; background:linear-gradient(135deg,#f5f9ff,#eef5ff); border-bottom:1px solid #dfe7f5; }
+    .branch-header h2 { color:var(--primary-blue); font-size:1.35rem; margin-bottom:.35rem; }
+    .branch-header p { color:var(--text-gray); margin:0; }
+    .role-list { padding:1.25rem; display:grid; gap:1rem; }
+    .role-card { border:1px solid #e5ebf6; border-radius:12px; padding:1rem; display:grid; gap:.75rem; }
+    .role-top { display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:flex-start; }
+    .role-top h3 { margin:0; font-size:1.1rem; color:var(--dark-gray); }
+    .status-badge { padding:.35rem .65rem; border-radius:999px; font-size:.8rem; font-weight:700; }
+    .status-open { background:#e9f9ef; color:#1d7f46; }
+    .status-limited { background:#fff4db; color:#9a6a00; }
+    .status-waitlist { background:#eef2ff; color:#4451c2; }
+    .status-closed { background:#fdecec; color:#b42318; }
+    .role-meta { display:flex; flex-wrap:wrap; gap:.75rem; color:var(--text-gray); font-size:.9rem; }
+    .role-actions { display:flex; gap:.75rem; flex-wrap:wrap; }
+    .btn-link { display:inline-block; padding:.75rem 1rem; border-radius:8px; text-decoration:none; font-weight:600; }
+    .btn-primary-link { background:var(--primary-blue); color:#fff; }
+    .btn-secondary-link { background:var(--light-blue); color:var(--primary-blue); }
+    @media (max-width: 900px) { .careers-layout { grid-template-columns: 1fr; } .side-nav { position:static; } }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="brand-wrap">
+        <img src="assets/openworlds-logo.png" alt="OpenWorlds logo" class="ow-logo">
+        <div class="nav-brand">OpenWorlds</div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="community.html">Community</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="careers-hero">
+    <div class="container">
+      <h1>OpenWorlds Careers Portal</h1>
+      <p>Explore branches, review position details, and apply to help shape the future of OpenWorlds.</p>
+    </div>
+  </section>
+
+  <section class="container careers-layout">
+    <aside class="side-nav">
+      <h3>Branches</h3>
+      <a href="#executive">Executive Leadership</a>
+      <a href="#engineering">Engineering & Software Development</a>
+      <a href="#design">Game Design & Systems Architecture</a>
+      <a href="#creative">Creative Content & Art Production</a>
+      <a href="#community-ops">Community Operations & Player Engagement</a>
+      <a href="#safety">Trust & Safety / Moderation</a>
+      <a href="#data">Data Science, Analytics & Research</a>
+      <a href="#ai">Artificial Intelligence & Procedural Systems</a>
+      <a href="#operations">Operations & Internal Systems</a>
+      <a href="#marketing">Marketing & Growth</a>
+      <a href="#business">Business Development & Strategy</a>
+      <a href="#legal">Legal & Policy</a>
+    </aside>
+
+    <main>
+      <div class="volunteer-notice">
+        <h2>Voluntary Contributor Notice</h2>
+        <p>OpenWorlds is built as a community-driven UGC game platform in active development.</p>
+        <p>All positions listed within the Careers Portal are voluntary contributor roles.</p>
+        <p>By applying for a position, applicants are choosing to take part in building and shaping OpenWorlds because they are interested in contributing to the platform, its systems, and its community.</p>
+        <p>These roles are not traditional employment positions and do not include salaries, wages, or employment contracts.</p>
+        <p>Instead, OpenWorlds contributors join out of interest in collaboration, creativity, and participation in building a large-scale game platform.</p>
+        <p>We value contribution, initiative, and commitment from individuals who want to be part of shaping the future of OpenWorlds.</p>
+      </div>
+
+      <section id="executive" class="branch-section">
+        <div class="branch-header"><h2>Executive Leadership Branch</h2><p>Strategic governance, senior operational guidance, and long-term platform direction.</p></div>
+        <div class="role-list">
+          <article class="role-card"><div class="role-top"><div><h3>Executive Strategic & Advisory Board</h3><div class="role-meta"><span>Department: Executive Leadership Branch</span></div></div></div></article>
+          <article class="role-card"><div class="role-top"><div><h3>Chief Technical Officer (CTO)</h3><div class="role-meta"><span>Department: Executive Leadership Branch</span></div></div></div></article>
+          <article class="role-card"><div class="role-top"><div><h3>Chief Operating Officer (COO)</h3><div class="role-meta"><span>Department: Executive Leadership Branch</span></div></div></div></article>
+          <article class="role-card"><div class="role-top"><div><h3>Chief Financial Officer (CFO)</h3><div class="role-meta"><span>Department: Executive Leadership Branch</span></div></div></div></article>
+          <article class="role-card"><div class="role-top"><div><h3>Chief Marketing Officer (CMO)</h3><div class="role-meta"><span>Department: Executive Leadership Branch</span></div></div></div></article>
+        </div>
+      </section>
+
+      <section id="engineering" class="branch-section"><div class="branch-header"><h2>Engineering & Software Development Branch</h2><p>Core systems, web infrastructure, platform services, and technical excellence.</p></div>
+        <div class="role-list">
+          <article class="role-card"><div class="role-top"><div><h3>Backend Platform Engineer</h3><div class="role-meta"><span>Department: Engineering & Software Development Branch</span></div></div></div></article>
+          <article class="role-card"><div class="role-top"><div><h3>Frontend Platform Engineer</h3><div class="role-meta"><span>Department: Engineering & Software Development Branch</span></div></div></div></article>
+        </div>
+      </section>
+
+      <section id="design" class="branch-section"><div class="branch-header"><h2>Game Design & Systems Architecture Branch</h2><p>Gameplay design, platform systems thinking, progression, and experience design.</p></div>
+        <div class="role-list">
+          <article class="role-card"><div class="role-top"><div><h3>Systems Designer</h3><div class="role-meta"><span>Department: Game Design & Systems Architecture Branch</span></div></div></div></article>
+        </div>
+      </section>
+
+      <section id="creative" class="branch-section"><div class="branch-header"><h2>Creative Content & Art Production Branch</h2><p>Visual identity, assets, environments, UI art, and creative production.</p></div>
+        <div class="role-list">
+          <article class="role-card"><div class="role-top"><div><h3>Concept Artist</h3><div class="role-meta"><span>Department: Creative Content & Art Production Branch</span></div></div></div></article>
+        </div>
+      </section>
+
+      <section id="community-ops" class="branch-section"><div class="branch-header"><h2>Community Operations & Player Engagement Branch</h2><p>Community health, contributor support, communication, and engagement strategy.</p></div>
+        <div class="role-list">
+          <article class="role-card"><div class="role-top"><div><h3>Community Operations Coordinator</h3><div class="role-meta"><span>Department: Community Operations & Player Engagement Branch</span></div></div></div></article>
+        </div>
+      </section>
+
+      <section id="safety" class="branch-section"><div class="branch-header"><h2>Trust & Safety / Moderation Branch</h2><p>Player safety, moderation standards, escalation handling, and healthy community culture.</p></div>
+        <div class="role-list">
+          <article class="role-card"><div class="role-top"><div><h3>Trust & Safety Analyst</h3><div class="role-meta"><span>Department: Trust & Safety / Moderation Branch</span></div></div></div></article>
+        </div>
+      </section>
+
+      <section id="data" class="branch-section"><div class="branch-header"><h2>Data Science, Analytics & Research Branch</h2><p>Platform insight, contributor research, user behavior analysis, and metrics.</p></div>
+        <div class="role-list">
+          <article class="role-card"><div class="role-top"><div><h3>Product Data Analyst</h3><div class="role-meta"><span>Department: Data Science, Analytics & Research Branch</span></div></div></div></article>
+        </div>
+      </section>
+
+      <section id="ai" class="branch-section"><div class="branch-header"><h2>Artificial Intelligence & Procedural Systems Branch</h2><p>Intelligent systems research, automation experimentation, and procedural content.</p></div>
+        <div class="role-list">
+          <article class="role-card"><div class="role-top"><div><h3>Procedural Systems Developer</h3><div class="role-meta"><span>Department: Artificial Intelligence & Procedural Systems Branch</span></div></div></div></article>
+        </div>
+      </section>
+
+      <section id="operations" class="branch-section"><div class="branch-header"><h2>Operations & Internal Systems Branch</h2><p>Internal documentation, contributor workflows, systems organization, and tooling.</p></div>
+        <div class="role-list">
+          <article class="role-card"><div class="role-top"><div><h3>Documentation & Workflow Specialist</h3><div class="role-meta"><span>Department: Operations & Internal Systems Branch</span></div></div></div></article>
+        </div>
+      </section>
+
+      <section id="marketing" class="branch-section"><div class="branch-header"><h2>Marketing & Growth Branch</h2><p>Positioning, content growth, platform storytelling, and audience expansion.</p></div>
+        <div class="role-list">
+          <article class="role-card"><div class="role-top"><div><h3>Growth Content Strategist</h3><div class="role-meta"><span>Department: Marketing & Growth Branch</span></div></div></div></article>
+        </div>
+      </section>
+
+      <section id="business" class="branch-section"><div class="branch-header"><h2>Business Development & Strategy Branch</h2><p>Partnership thinking, platform positioning, business opportunity analysis, and deals.</p></div>
+        <div class="role-list">
+          <article class="role-card"><div class="role-top"><div><h3>Business Strategy Associate</h3><div class="role-meta"><span>Department: Business Development & Strategy Branch</span></div></div></div></article>
+        </div>
+      </section>
+
+      <section id="legal" class="branch-section"><div class="branch-header"><h2>Legal & Policy Branch</h2><p>Policy drafting support, trust standards, governance materials, and platform compliance.</p></div>
+        <div class="role-list">
+          <article class="role-card"><div class="role-top"><div><h3>Policy Research Specialist</h3><div class="role-meta"><span>Department: Legal & Policy Branch</span></div></div></div></article>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section"><div class="brand-wrap"><img src="assets/openworlds-logo.png" alt="OpenWorlds logo" class="ow-logo"><h4>OpenWorlds</h4></div><p>Empowering creators worldwide</p></div>
+        <div class="footer-section"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="careers.html">Careers</a></li><li><a href="community.html">Community</a></li><li><a href="index.html#contact">Support</a></li></ul></div>
+        <div class="footer-section"><h4>Follow Us</h4><div class="social-links"><a href="https://discord.gg/TRJ8ZmBKDS"><i class="fab fa-discord"></i></a><a href="https://www.youtube.com/@Official-OpenWorlds"><i class="fab fa-youtube"></i></a></div></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2024 OpenWorlds. All rights reserved.</p></div>
+    </div>
+  </footer>
+</body>
+</html>

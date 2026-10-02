@@ -1,565 +1,297 @@
-:root {
-    --primary-blue: #0066cc;
-    --dark-blue: #004a99;
-    --light-blue: #e6f0ff;
-    --white: #ffffff;
-    --gray: #f5f5f5;
-    --dark-gray: #333333;
-    --text-gray: #666666;
-    --learning-blue: #0a2540;
-    --learning-surface: #f4f8ff;
-    --learning-accent: #7c3aed;
-    --learning-gold: #fbbf24;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: var(--dark-gray);
-    background-color: var(--white);
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.navbar {
-    background-color: var(--primary-blue);
-    color: var(--white);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-brand {
-    font-size: 1.8rem;
-    font-weight: bold;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.nav-links a {
-    color: var(--white);
-    text-decoration: none;
-    transition: opacity 0.3s ease;
-}
-
-.nav-links a:hover {
-    opacity: 0.8;
-}
-
-.hero {
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-    color: var(--white);
-    padding: 100px 20px;
-    text-align: center;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.hero-content {
-    max-width: 900px;
-}
-
-.hero-content h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
-}
-
-.hero-content > p:nth-of-type(1) {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.hero-description {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.btn {
-    padding: 12px 30px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.btn-primary {
-    background-color: var(--white);
-    color: var(--primary-blue);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--white);
-    border: 2px solid var(--white);
-}
-
-.btn-secondary:hover {
-    background-color: var(--white);
-    color: var(--primary-blue);
-}
-
-.about {
-    padding: 80px 20px;
-    background-color: var(--gray);
-}
-
-.about h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: var(--primary-blue);
-}
-
-.about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
-}
-
-.about-text p {
-    margin-bottom: 1.5rem;
-    color: var(--text-gray);
-    line-height: 1.8;
-}
-
-.learning-preview {
-    padding: 90px 20px;
-    background: linear-gradient(180deg, #f6f9ff 0%, #eef4ff 100%);
-}
-
-.section-heading {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.eyebrow {
-    display: inline-block;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--primary-blue);
-    font-size: 0.78rem;
-    font-weight: 700;
-    margin-bottom: 0.8rem;
-}
-
-.section-heading h2 {
-    font-size: 2.5rem;
-    color: var(--learning-blue);
-    margin: 0;
-}
-
-.learning-cards {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.6rem;
-    margin-top: 2rem;
-}
-
-.mini-learning-card {
-    background: var(--white);
-    border: 1px solid rgba(0, 102, 204, 0.14);
-    border-radius: 18px;
-    padding: 1.6rem;
-    box-shadow: 0 10px 30px rgba(15, 51, 96, 0.08);
-}
-
-.mini-icon {
-    width: 54px;
-    height: 54px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 14px;
-    background: linear-gradient(135deg, var(--light-blue), rgba(124, 58, 237, 0.12));
-    color: var(--primary-blue);
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-}
-
-.mini-learning-card h3 {
-    color: var(--learning-blue);
-    margin-bottom: 0.7rem;
-    font-size: 1.5rem;
-}
-
-.mini-learning-card p {
-    color: var(--text-gray);
-    line-height: 1.7;
-    margin-bottom: 1rem;
-}
-
-.mini-learning-card a {
-    color: var(--primary-blue);
-    text-decoration: none;
-    font-weight: 700;
-}
-
-.contact {
-    padding: 80px 20px;
-    background-color: var(--gray);
-}
-
-.contact h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: var(--primary-blue);
-}
-
-.contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-}
-
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.contact-item {
-    display: flex;
-    gap: 1.5rem;
-    background-color: var(--white);
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.contact-item i {
-    font-size: 2rem;
-    color: var(--primary-blue);
-}
-
-.contact-item h3 {
-    color: var(--dark-gray);
-    margin-bottom: 0.5rem;
-}
-
-.contact-item a {
-    color: var(--primary-blue);
-    text-decoration: none;
-}
-
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.contact-form input,
-.contact-form textarea {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-family: inherit;
-    font-size: 1rem;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-    outline: none;
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 5px rgba(0, 102, 204, 0.3);
-}
-
-.footer {
-    background-color: var(--primary-blue);
-    color: var(--white);
-    padding: 3rem 20px 1rem;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.footer-section h4 {
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-section a {
-    color: var(--white);
-    text-decoration: none;
-    transition: opacity 0.3s ease;
-}
-
-.footer-section a:hover {
-    opacity: 0.8;
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-}
-
-.social-links a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-}
-
-.social-links a:hover {
-    background-color: rgba(255, 255, 255, 0.4);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    opacity: 0.8;
-}
-
-.learning-page .topbar {
-    background: linear-gradient(135deg, #0a2540 0%, #0e3a70 100%);
-    color: var(--white);
-    padding: 72px 20px 64px;
-}
-
-.learning-page .learning-hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-}
-
-.learning-page .learning-hero h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: 1rem;
-}
-
-.learning-page .learning-hero p {
-    max-width: 700px;
-    color: rgba(255,255,255,0.8);
-    line-height: 1.8;
-}
-
-.learning-page .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 0.55rem 0.9rem;
-    margin-bottom: 1rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.learning-page .hero-callout {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 18px;
-    padding: 1.5rem;
-    min-width: 280px;
-}
-
-.learning-page .hero-callout h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.6rem;
-}
-
-.learning-page .hero-callout ul {
-    list-style: none;
-    color: rgba(255,255,255,0.85);
-    line-height: 1.9;
-}
-
-.learning-page .learning-content {
-    padding: 80px 20px;
-    background: linear-gradient(180deg, #f6f9ff 0%, #edf4ff 100%);
-}
-
-.learning-page .filter-bar {
-    display: flex;
-    gap: 0.8rem;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-}
-
-.filter-btn {
-    background: var(--white);
-    color: var(--dark-gray);
-    border: 1px solid rgba(0, 102, 204, 0.15);
-    border-radius: 999px;
-    padding: 0.7rem 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.filter-btn.active,
-.filter-btn:hover {
-    background: var(--primary-blue);
-    border-color: var(--primary-blue);
-    color: var(--white);
-}
-
-.lesson-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.5rem;
-}
-
-.lesson-card {
-    background: var(--white);
-    border-radius: 18px;
-    border: 1px solid rgba(0, 102, 204, 0.12);
-    padding: 1.5rem;
-    box-shadow: 0 10px 25px rgba(12, 40, 79, 0.06);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.lesson-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 35px rgba(12, 40, 79, 0.1);
-}
-
-.lesson-card.hidden {
-    display: none;
-}
-
-.lesson-card .tag {
-    display: inline-block;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--primary-blue);
-    background: var(--light-blue);
-    border-radius: 999px;
-    padding: 0.42rem 0.7rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
-}
-
-.lesson-card h3 {
-    color: var(--learning-blue);
-    font-size: 1.6rem;
-    margin-bottom: 0.7rem;
-}
-
-.lesson-card p {
-    color: var(--text-gray);
-    line-height: 1.7;
-    margin-bottom: 1rem;
-}
-
-.lesson-meta {
-    display: flex;
-    justify-content: space-between;
-    color: var(--text-gray);
-    font-size: 0.88rem;
-    margin-top: 1rem;
-    padding-top: 0.9rem;
-    border-top: 1px solid rgba(0, 102, 204, 0.09);
-}
-
-.lesson-link {
-    display: inline-block;
-    margin-top: 1rem;
-    color: var(--primary-blue);
-    text-decoration: none;
-    font-weight: 700;
-}
-
-@media (max-width: 768px) {
-    .nav-links {
-        gap: 1rem;
-        font-size: 0.9rem;
-    }
-
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-
-    .about-content,
-    .contact-content,
-    .lesson-grid,
-    .learning-page .learning-hero {
-        grid-template-columns: 1fr;
-        display: grid;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-    }
-
-    .btn {
-        width: 100%;
-    }
-
-    .learning-cards {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 600px) {
-    .learning-page .hero-callout {
-        min-width: 0;
-    }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenWorlds Learning Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="learning-page">
+    <nav class="navbar">
+        <div class="container">
+            <div class="brand-wrap">
+                <img src="assets/openworlds-logo.png" alt="OpenWorlds logo" class="ow-logo">
+                <div class="nav-brand">OpenWorlds</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="learning.html">Learning</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="topbar">
+        <div class="container learning-hero">
+            <div>
+                <div class="hero-badge"><i class="fas fa-graduation-cap"></i> Learning Center</div>
+                <h1>Learn coding for everyone.</h1>
+                <p>OpenWorlds Learning is a public, beginner-friendly place for anyone to learn coding, web development, game logic, backend systems, AI tools, and the skills needed to build modern digital products.</p>
+            </div>
+            <div class="hero-callout">
+                <h3>What you'll learn</h3>
+                <ul>
+                    <li><i class="fas fa-check"></i> HTML, CSS, JavaScript</li>
+                    <li><i class="fas fa-check"></i> Frontend, backend, and full stack</li>
+                    <li><i class="fas fa-check"></i> Game development and UGC systems</li>
+                    <li><i class="fas fa-check"></i> AI tools, APIs, and deployment</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="learning-content">
+        <div class="container">
+            <div class="section-heading narrow-heading">
+                <p class="eyebrow">Choose your path</p>
+                <h2>Start wherever you are.</h2>
+            </div>
+
+            <div class="path-grid">
+                <article class="path-card">
+                    <div class="path-icon"><i class="fas fa-seedling"></i></div>
+                    <h3>Start from Zero</h3>
+                    <p>Learn the basics of coding, problem solving, and how websites and apps work.</p>
+                </article>
+                <article class="path-card">
+                    <div class="path-icon"><i class="fas fa-palette"></i></div>
+                    <h3>Frontend</h3>
+                    <p>Explore HTML, CSS, JavaScript, responsive design, UI/UX, and modern frontend tools.</p>
+                </article>
+                <article class="path-card">
+                    <div class="path-icon"><i class="fas fa-database"></i></div>
+                    <h3>Backend</h3>
+                    <p>Learn APIs, databases, authentication, server logic, cloud deployment, and app architecture.</p>
+                </article>
+                <article class="path-card">
+                    <div class="path-icon"><i class="fas fa-code-branch"></i></div>
+                    <h3>Full Stack</h3>
+                    <p>Connect the frontend and backend to build complete products from idea to deployment.</p>
+                </article>
+                <article class="path-card">
+                    <div class="path-icon"><i class="fas fa-gamepad"></i></div>
+                    <h3>Game Dev</h3>
+                    <p>Build interactivity, game loops, UGC systems, creative tooling, and player-centered experiences.</p>
+                </article>
+                <article class="path-card">
+                    <div class="path-icon"><i class="fas fa-brain"></i></div>
+                    <h3>AI & Tools</h3>
+                    <p>Use AI to automate work, improve development, and learn how modern coding workflows evolve.</p>
+                </article>
+            </div>
+
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="code">Code</button>
+                <button class="filter-btn" data-filter="frontend">Frontend</button>
+                <button class="filter-btn" data-filter="backend">Backend</button>
+                <button class="filter-btn" data-filter="games">Games</button>
+                <button class="filter-btn" data-filter="ai">AI</button>
+            </div>
+
+            <div class="lesson-grid">
+                <article class="lesson-card" data-category="code">
+                    <div class="tag">Code</div>
+                    <h3>HTML & CSS for Beginners</h3>
+                    <p>Learn how to structure webpages, style layouts, and build clean, responsive interfaces from scratch.</p>
+                    <div class="lesson-meta">
+                        <span>Level: Beginner</span>
+                        <span>8 lessons</span>
+                    </div>
+                    <a class="lesson-link" href="#">Start lesson <i class="fas fa-arrow-right"></i></a>
+                </article>
+
+                <article class="lesson-card" data-category="code">
+                    <div class="tag">Code</div>
+                    <h3>JavaScript Fundamentals</h3>
+                    <p>Understand variables, functions, conditions, arrays, loops, logic, and the core building blocks of interactivity.</p>
+                    <div class="lesson-meta">
+                        <span>Level: Beginner</span>
+                        <span>10 lessons</span>
+                    </div>
+                    <a class="lesson-link" href="#">Start lesson <i class="fas fa-arrow-right"></i></a>
+                </article>
+
+                <article class="lesson-card" data-category="frontend">
+                    <div class="tag">Frontend</div>
+                    <h3>Responsive Web Design</h3>
+                    <p>Learn how to build pages that look great on desktops, tablets, and mobile screens using modern layouts.</p>
+                    <div class="lesson-meta">
+                        <span>Level: Beginner</span>
+                        <span>7 lessons</span>
+                    </div>
+                    <a class="lesson-link" href="#">Start lesson <i class="fas fa-arrow-right"></i></a>
+                </article>
+
+                <article class="lesson-card" data-category="frontend">
+                    <div class="tag">Frontend</div>
+                    <h3>JavaScript for User Interfaces</h3>
+                    <p>Go beyond basics and learn DOM manipulation, events, UI updates, forms, and user interactions.</p>
+                    <div class="lesson-meta">
+                        <span>Level: Intermediate</span>
+                        <span>9 lessons</span>
+                    </div>
+                    <a class="lesson-link" href="#">Start lesson <i class="fas fa-arrow-right"></i></a>
+                </article>
+
+                <article class="lesson-card" data-category="backend">
+                    <div class="tag">Backend</div>
+                    <h3>Node.js & APIs</h3>
+                    <p>Build simple servers, create API routes, handle requests, and connect apps to real data and services.</p>
+                    <div class="lesson-meta">
+                        <span>Level: Intermediate</span>
+                        <span>11 lessons</span>
+                    </div>
+                    <a class="lesson-link" href="#">Start lesson <i class="fas fa-arrow-right"></i></a>
+                </article>
+
+                <article class="lesson-card" data-category="backend">
+                    <div class="tag">Backend</div>
+                    <h3>Databases & SQL</h3>
+                    <p>Learn how data is stored, queried, and managed with SQL, databases, tables, relationships, and models.</p>
+                    <div class="lesson-meta">
+                        <span>Level: Intermediate</span>
+                        <span>8 lessons</span>
+                    </div>
+                    <a class="lesson-link" href="#">Start lesson <i class="fas fa-arrow-right"></i></a>
+                </article>
+
+                <article class="lesson-card" data-category="backend">
+                    <div class="tag">Backend</div>
+                    <h3>Authentication & Security</h3>
+                    <p>Understand how login systems, sessions, tokens, authorization, validation, and safe app design work.</p>
+                    <div class="lesson-meta">
+                        <span>Level: Intermediate</span>
+                        <span>6 lessons</span>
+                    </div>
+                    <a class="lesson-link" href="#">Start lesson <i class="fas fa-arrow-right"></i></a>
+                </article>
+
+                <article class="lesson-card" data-category="games">
+                    <div class="tag">Games</div>
+                    <h3>Game Logic & Interactivity</h3>
+                    <p>Learn how movement, collisions, scoring, states, and event-driven systems work in playable experiences.</p>
+                    <div class="lesson-meta">
+                        <span>Level: Beginner</span>
+                        <span>7 lessons</span>
+                    </div>
+                    <a class="lesson-link" href="#">Start lesson <i class="fas fa-arrow-right"></i></a>
+                </article>
+
+                <article class="lesson-card" data-category="games">
+                    <div class="tag">Games</div>
+                    <h3>UGC & Creator Systems</h3>
+                    <p>Explore how user-generated systems are built, moderated, and scaled inside collaborative platforms.</p>
+                    <div class="lesson-meta">
+                        <span>Level: Intermediate</span>
+                        <span>6 lessons</span>
+                    </div>
+                    <a class="lesson-link" href="#">Start lesson <i class="fas fa-arrow-right"></i></a>
+                </article>
+
+                <article class="lesson-card" data-category="ai">
+                    <div class="tag">AI</div>
+                    <h3>AI for Developers</h3>
+                    <p>Learn how AI tools can support coding, testing, prompt writing, automation, and creative problem solving.</p>
+                    <div class="lesson-meta">
+                        <span>Level: Beginner</span>
+                        <span>5 lessons</span>
+                    </div>
+                    <a class="lesson-link" href="#">Start lesson <i class="fas fa-arrow-right"></i></a>
+                </article>
+
+                <article class="lesson-card" data-category="ai">
+                    <div class="tag">AI</div>
+                    <h3>Prompt Engineering Basics</h3>
+                    <p>Learn how to ask better questions, structure prompts, and get useful responses from AI assistants.</p>
+                    <div class="lesson-meta">
+                        <span>Level: Beginner</span>
+                        <span>4 lessons</span>
+                    </div>
+                    <a class="lesson-link" href="#">Start lesson <i class="fas fa-arrow-right"></i></a>
+                </article>
+
+                <article class="lesson-card" data-category="code">
+                    <div class="tag">Code</div>
+                    <h3>Git & GitHub Essentials</h3>
+                    <p>Learn version control, collaboration, branching, pull requests, and how developers work on real projects.</p>
+                    <div class="lesson-meta">
+                        <span>Level: Beginner</span>
+                        <span>5 lessons</span>
+                    </div>
+                    <a class="lesson-link" href="#">Start lesson <i class="fas fa-arrow-right"></i></a>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <section class="learning-why">
+        <div class="container">
+            <div class="section-heading narrow-heading">
+                <p class="eyebrow">Why OpenWorlds Learning?</p>
+                <h2>Built for curious people.</h2>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Beginner friendly</h3>
+                    <p>Start with foundational concepts and build up step by step without feeling overwhelmed.</p>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Practical learning</h3>
+                    <p>Each path is focused on building useful skills for real projects and real products.</p>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-code"></i>
+                    <h3>All coding paths</h3>
+                    <p>Learn web development, backend systems, game logic, AI tools, and creator-focused development.</p>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Community focus</h3>
+                    <p>OpenWorlds connects learning with creator culture, collaboration, and product building.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="brand-wrap">
+                        <img src="assets/openworlds-logo.png" alt="OpenWorlds logo" class="ow-logo">
+                        <h4>OpenWorlds</h4>
+                    </div>
+                    <p>Empowering creators worldwide</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="learning.html">Learning</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="community.html">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="https://discord.gg/TRJ8ZmBKDS"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.youtube.com/@Official-OpenWorlds"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 OpenWorlds. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

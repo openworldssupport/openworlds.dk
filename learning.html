@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenWorlds Learning Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --dark-blue: #004a99;
+            --light-blue: #e6f0ff;
+            --white: #ffffff;
+            --gray: #f5f5f5;
+            --dark-gray: #333333;
+            --text-gray: #666666;
+            --soft-border: rgba(93, 131, 197, 0.2);
+            --shadow: rgba(15, 32, 55, 0.06);
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--white);
+            color: var(--dark-gray);
+            line-height: 1.7;
+        }
+
+        a { color: var(--primary-blue); }
+        img { max-width: 100%; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        .navbar {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .brand-wrap { display: flex; align-items: center; gap: 0.8rem; }
+        .ow-logo { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; }
+        .nav-brand { font-size: 1.8rem; font-weight: bold; }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.95;
+            font-weight: 600;
+        }
+        .nav-links a:hover { opacity: 1; }
+
+        .learning-hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: var(--white);
+            padding: 90px 20px 80px;
+        }
+        .learning-hero h1 {
+            margin: 0 0 1rem;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            line-height: 1.1;
+            text-align: center;
+        }
+        .learning-hero p {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            text-align: center;
+            opacity: 0.96;
+        }
+
+        .search-wrap {
+            max-width: 900px;
+            margin: 2rem auto 0;
+            position: relative;
+        }
+        .search-wrap input {
+            width: 100%;
+            padding: 1rem 1.2rem 1rem 3.2rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.12);
+            color: var(--white);
+            font-size: 1rem;
+            outline: none;
+        }
+        .search-wrap input::placeholder { color: rgba(255,255,255,0.8); }
+        .search-wrap i {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.8);
+        }
+
+        .learning-main {
+            padding: 3rem 0 5rem;
+            background: linear-gradient(180deg, #f7fbff 0%, #ffffff 16%);
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        .pill {
+            padding: 0.65rem 1.1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(0,102,204,0.18);
+            background: var(--white);
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background: var(--white);
+            border: 1px solid var(--soft-border);
+            border-left: 5px solid var(--primary-blue);
+            border-radius: 14px;
+            padding: 1.4rem;
+            box-shadow: 0 3px 12px var(--shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+        }
+        .category-card h3 {
+            margin: 0 0 0.6rem;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+        .category-card p {
+            margin: 0 0 1rem;
+            color: var(--text-gray);
+            font-size: 0.98rem;
+        }
+        .category-tag {
+            display: inline-block;
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            border-radius: 999px;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .library-structure {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        details {
+            background: var(--white);
+            border: 1px solid var(--soft-border);
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+        summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 1.25rem 1.4rem;
+            background: linear-gradient(135deg, #f7fbff 0%, #eef5ff 100%);
+            font-weight: 700;
+            color: var(--dark-blue);
+            border-bottom: 1px solid var(--soft-border);
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            float: right;
+            color: var(--primary-blue);
+        }
+        details[open] summary::after { content: '\f106'; }
+
+        .topic-body {
+            padding: 1.5rem 1.4rem 1.25rem;
+        }
+
+        .topic-overview {
+            margin: 0 0 1.2rem;
+            color: var(--text-gray);
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .concept-card {
+            border: 1px solid #e7edf8;
+            border-radius: 12px;
+            padding: 1rem;
+            background: #fcfdff;
+        }
+        .concept-card h4 {
+            margin: 0 0 0.45rem;
+            font-size: 1rem;
+            color: var(--dark-gray);
+        }
+        .concept-card p {
+            margin: 0;
+            color: var(--text-gray);
+            font-size: 0.92rem;
+        }
+
+        .deep-dive {
+            margin-top: 2rem;
+            background: var(--white);
+            border: 1px solid var(--soft-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        .deep-dive h3 {
+            margin-top: 0;
+            color: var(--primary-blue);
+            font-size: 1.6rem;
+        }
+        .deep-dive h4 {
+            margin: 1.25rem 0 0.5rem;
+            color: var(--dark-blue);
+        }
+        .deep-dive p, .deep-dive li {
+            color: var(--text-gray);
+        }
+
+        pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 1rem 1.1rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-size: 0.92rem;
+            margin: 1rem 0;
+        }
+        code { font-family: Consolas, Monaco, monospace; }
+
+        .inline-example {
+            display: inline-block;
+            background: #f5f8ff;
+            border: 1px solid #dde7ff;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 3rem 20px 1rem;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .footer-section ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .footer-section li { margin-bottom: 0.5rem; }
+        .footer-section a { color: var(--white); text-decoration: none; }
+        .footer-section a:hover { opacity: 0.8; }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .social-links a {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            color: var(--white);
+        }
+        .footer-bottom {
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            opacity: 0.85;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.9rem;
+            }
+            .nav-links { gap: 0.8rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="brand-wrap">
+                <img src="assets/openworlds-logo.png" alt="OpenWorlds logo" class="ow-logo">
+                <div class="nav-brand">OpenWorlds</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="learning.html">Learning Center</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="learning-hero">
+        <div class="container">
+            <h1>OpenWorlds Learning Center</h1>
+            <p>
+                A professional, information-only library of programming and computer science knowledge, structured for absolute beginners and advanced developers alike.
+            </p>
+            <div class="search-wrap">
+                <i class="fas fa-search"></i>
+                <input id="librarySearch" type="text" placeholder="Search topics like variables, Python, C#, SQL, Unity, TCP, Big O...">
+            </div>
+        </div>
+    </header>
+
+    <main class="learning-main">
+        <div class="container">
+            <div class="filter-row">
+                <span class="pill">Beginner</span>
+                <span class="pill">Intermediate</span>
+                <span class="pill">Advanced</span>
+                <span class="pill">Expert</span>
+            </div>
+
+            <section class="category-grid" id="categoryGrid">
+                <article class="category-card">
+                    <div class="category-tag">Fundamentals</div>
+                    <h3>Programming Fundamentals</h3>
+                    <p>Variables, functions, conditions, loops, data types, objects, debugging, and the mental model behind software design.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">Languages</div>
+                    <h3>Python</h3>
+                    <p>Readable syntax, object-oriented design, modules, file handling, async programming, testing, and modern Python development.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">Languages</div>
+                    <h3>C#</h3>
+                    <p>.NET foundations, classes, properties, exception handling, LINQ, async/await, memory models, and enterprise patterns.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">Languages</div>
+                    <h3>JavaScript & TypeScript</h3>
+                    <p>Browser behavior, DOM, asynchronous code, APIs, TypeScript safety, generics, modules, and scalable frontend patterns.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">Web</div>
+                    <h3>Web Development</h3>
+                    <p>HTML structure, CSS layout, responsiveness, JavaScript behavior, browser APIs, HTTP, REST, full-stack architecture.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">Game Dev</div>
+                    <h3>Game Development</h3>
+                    <p>Game loops, scenes, physics, animation, AI, input, render pipelines, save systems, game architecture, and networking.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">Unity</div>
+                    <h3>Unity</h3>
+                    <p>Scenes, GameObjects, components, colliders, physics, UI systems, ScriptableObjects, optimization, and project architecture.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">CS</div>
+                    <h3>Computer Science</h3>
+                    <p>Binary, memory, CPU/GPU, operating systems, processes, filesystems, networking fundamentals, and architecture basics.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">Data</div>
+                    <h3>Data Structures</h3>
+                    <p>Arrays, linked lists, stacks, queues, hashing, trees, heaps, graphs, and the costs of each structure in real systems.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">Algorithms</div>
+                    <h3>Algorithms</h3>
+                    <p>Searching, sorting, recursion, greedy logic, dynamic programming, graph traversal, shortest paths, and Big O analysis.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">Data</div>
+                    <h3>Databases</h3>
+                    <p>Tables, keys, joins, normalization, indexes, transactions, ACID, SQL, and trade-offs between relational and NoSQL storage.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">Networking</div>
+                    <h3>Networking</h3>
+                    <p>TCP, UDP, HTTP, HTTPS, ports, routing, latency, packet flow, multiplayer synchronization, and client/server design.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">Engineering</div>
+                    <h3>Software Engineering</h3>
+                    <p>Git, version control, testing, refactoring, architecture, maintainability, CI/CD, technical debt, and design patterns.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">Security</div>
+                    <h3>Cybersecurity</h3>
+                    <p>Authentication, authorization, encryption, hashing, secure coding, HTTP security, common vulnerabilities, and defense-in-depth.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">AI</div>
+                    <h3>AI & Machine Learning</h3>
+                    <p>Training data, model evaluation, classification, neural networks, embeddings, transformers, and AI system design.</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-tag">Advanced</div>
+                    <h3>Advanced Topics</h3>
+                    <p>Compilers, distributed systems, concurrency, virtualization, rendering, performance tuning, and large-scale software thinking.</p>
+                </article>
+            </section>
+
+            <section class="library-structure">
+                <details open>
+                    <summary>Programming Fundamentals</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">Programming is the act of telling a computer what to do using a language it can interpret or compile. A program is a set of instructions that turn input into output, process data, and respond to events.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>What is code?</h4><p>Source code is human-readable instructions written in a language that a compiler or interpreter understands.</p></div>
+                            <div class="concept-card"><h4>Variables</h4><p>Variables store values in memory so programs can reuse and change information during execution.</p></div>
+                            <div class="concept-card"><h4>Data types</h4><p>Integers, floats, strings, booleans, and more define the kind of data a variable can hold.</p></div>
+                            <div class="concept-card"><h4>Functions</h4><p>Functions isolate reusable logic and make programs easier to understand, test, and maintain.</p></div>
+                            <div class="concept-card"><h4>Conditions</h4><p>If statements decide what logic runs based on truth values and comparisons.</p></div>
+                            <div class="concept-card"><h4>Loops</h4><p>Loops repeat work until a condition changes, helping automate repeated tasks.</p></div>
+                        </div>
+
+                        <div class="deep-dive">
+                            <h3>Variables, Values, and Memory</h3>
+                            <p>A variable is a named location in memory. The value stored there can be read, changed, and reused. For example:</p>
+                            <pre><code>age = 18
+name = "Ada"
+active = True
+</code></pre>
+                            <p>Here, <span class="inline-example">age</span> is a variable storing a number, <span class="inline-example">name</span> stores text, and <span class="inline-example">active</span> stores a boolean. The exact memory representation depends on the programming language and the machine architecture.</p>
+                            <h4>Why variables exist</h4>
+                            <p>Without variables, programs would have to hard-code values everywhere. Variables make logic flexible and reusable.</p>
+                            <h4>Common mistakes</h4>
+                            <ul>
+                                <li>Using a variable before assigning a value.</li>
+                                <li>Mixing data types without understanding conversion rules.</li>
+                                <li>Reusing names in ways that confuse scope.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Python</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">Python is one of the most beginner-friendly programming languages. It is known for readability, broad ecosystem support, and its use in automation, data science, web development, AI, and scripting.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>Python syntax</h4><p>Uses indentation to define blocks, which keeps code visually clean and easy to follow.</p></div>
+                            <div class="concept-card"><h4>Lists</h4><p>Ordered collections of values that can be changed and iterated over.</p></div>
+                            <div class="concept-card"><h4>Dictionaries</h4><p>Key-value pairs used to represent mappings and structured data.</p></div>
+                            <div class="concept-card"><h4>Functions</h4><p>Reusable blocks that encapsulate logic and return values.</p></div>
+                            <div class="concept-card"><h4>Classes</h4><p>Blueprints for objects that describe both state and behaviors.</p></div>
+                            <div class="concept-card"><h4>Async programming</h4><p>Useful for concurrent tasks such as web requests, file I/O, and background jobs.</p></div>
+                        </div>
+
+                        <div class="deep-dive">
+                            <h3>Functions and Scope</h3>
+                            <pre><code>def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("OpenWorlds"))
+</code></pre>
+                            <p>Functions let developers package logic into reusable units. Sometimes the function takes input, sometimes it returns a value, and sometimes it does both. Scope determines where a variable can be accessed. A variable defined inside a function usually does not exist outside it.</p>
+                            <h4>Why this matters</h4>
+                            <p>Scope prevents accidental variable conflicts and helps keep code modular and predictable.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>C#</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">C# is a modern object-oriented language built for the .NET ecosystem. It is widely used in enterprise software, game development, backend systems, and desktop applications.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>Variables and types</h4><p>C# gives strong type safety while still providing convenience for modern software development.</p></div>
+                            <div class="concept-card"><h4>Classes</h4><p>Object-oriented structure for modeling real entities and behaviors.</p></div>
+                            <div class="concept-card"><h4>Interfaces</h4><p>Contracts that define required members while remaining flexible.</p></div>
+                            <div class="concept-card"><h4>Generics</h4><p>Reusable code that can work with many data types while preserving safety.</p></div>
+                            <div class="concept-card"><h4>LINQ</h4><p>Query syntax for selecting, filtering, and transforming data in a declarative style.</p></div>
+                            <div class="concept-card"><h4>Async and await</h4><p>Modern patterns for workloads that wait on external operations without blocking the program.</p></div>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>JavaScript & TypeScript</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">JavaScript powers web browsers, and TypeScript adds static typing on top of JavaScript to make large codebases easier to manage and reason about.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>Functions</h4><p>Functions are first-class values in JavaScript and can be passed around as data.</p></div>
+                            <div class="concept-card"><h4>Objects</h4><p>Objects group related data and behavior together in flexible structures.</p></div>
+                            <div class="concept-card"><h4>Promises</h4><p>Represent asynchronous work that will complete later.</p></div>
+                            <div class="concept-card"><h4>DOM</h4><p>The browser document model lets code read and modify page structure and content.</p></div>
+                            <div class="concept-card"><h4>TypeScript types</h4><p>Types help prevent common mistakes before runtime.</p></div>
+                            <div class="concept-card"><h4>Generics</h4><p>General-purpose logic that can be reused across type variations.</p></div>
+                        </div>
+                        <div class="deep-dive">
+                            <h3>Async Programming</h3>
+                            <pre><code>async function loadData() {
+  const response = await fetch('/api/data');
+  const data = await response.json();
+  return data;
+}
+</code></pre>
+                            <p>Async/await is a structured way to write code that waits for operations like network requests without blocking the whole page. The language can continue processing other work while the request finishes.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Web Development</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">Web development includes building interfaces and the backend logic that serves data. HTML defines structure, CSS defines presentation, and JavaScript adds behavior.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>HTML</h4><p>Semantic structure such as headings, lists, forms, sections, and accessibility-friendly markup.</p></div>
+                            <div class="concept-card"><h4>CSS</h4><p>Layout, colors, spacing, typography, responsiveness, animations, and design consistency.</p></div>
+                            <div class="concept-card"><h4>Flexbox & Grid</h4><p>Modern CSS layout systems that make complex interfaces manageable.</p></div>
+                            <div class="concept-card"><h4>HTTP</h4><p>Protocol for sending requests and responses between clients and servers.</p></div>
+                            <div class="concept-card"><h4>REST</h4><p>Common architectural style for APIs using predictable resource-based patterns.</p></div>
+                            <div class="concept-card"><h4>Frontend vs backend</h4><p>Frontend handles interface behavior; backend handles business logic, persistence, and APIs.</p></div>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Game Development</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">Game development combines software engineering with creative design. It requires systems for rendering, input, simulation, physics, animation, audio, data flow, and player experience.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>Game loop</h4><p>A loop that updates world state and renders frames repeatedly.</p></div>
+                            <div class="concept-card"><h4>Input handling</h4><p>Keyboard, mouse, controllers, touch, and gamepad processing.</p></div>
+                            <div class="concept-card"><h4>Physics</h4><p>Movement simulation, collisions, forces, and constraints.</p></div>
+                            <div class="concept-card"><h4>Animation</h4><p>State-driven motion and visual change over time.</p></div>
+                            <div class="concept-card"><h4>Networking</h4><p>Synchronization of state across connected players.</p></div>
+                            <div class="concept-card"><h4>Optimization</h4><p>Performance tuning for frame time and memory budgets.</p></div>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Unity</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">Unity is a popular engine for 2D and 3D games, simulations, and interactive experiences. It combines editor tooling with C# scripting and scene-based design.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>Scenes</h4><p>Collections of game objects and environments.</p></div>
+                            <div class="concept-card"><h4>GameObjects</h4><p>Entities that exist in the scene and can hold components.</p></div>
+                            <div class="concept-card"><h4>Components</h4><p>Behaviors attached to objects such as renderers, scripts, colliders, and sounds.</p></div>
+                            <div class="concept-card"><h4>Prefabs</h4><p>Reusable templates used to spawn similar objects repeatedly.</p></div>
+                            <div class="concept-card"><h4>Physics</h4><p>Collision, rigid bodies, movement forces, and interaction rules.</p></div>
+                            <div class="concept-card"><h4>ScriptableObjects</h4><p>Data containers used to manage configuration, progress data, and reusable assets.</p></div>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Computer Science</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">Computer science studies how information is represented, processed, transformed, and communicated by computers. It includes theory, architecture, systems, and algorithms.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>Binary</h4><p>Data is represented using ones and zeros at the lowest level.</p></div>
+                            <div class="concept-card"><h4>CPU</h4><p>The central processing unit executes instructions and coordinates computation.</p></div>
+                            <div class="concept-card"><h4>RAM</h4><p>Short-term memory used while programs are actively running.</p></div>
+                            <div class="concept-card"><h4>Storage</h4><p>Persistent data storage used for files, programs, and databases.</p></div>
+                            <div class="concept-card"><h4>Operating systems</h4><p>Manage hardware, processes, scheduling, memory, and device access.</p></div>
+                            <div class="concept-card"><h4>Threads & processes</h4><p>Execution units used to parallelize work and handle concurrency.</p></div>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Data Structures</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">Data structures are organized ways to store and access data efficiently. Choosing the correct structure changes the speed and simplicity of programs.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>Arrays</h4><p>Contiguous data collections with direct indexing by position.</p></div>
+                            <div class="concept-card"><h4>Stacks</h4><p>LIFO ordering used for undo, recursion, and expression evaluation.</p></div>
+                            <div class="concept-card"><h4>Queues</h4><p>FIFO ordering used for scheduling and buffers.</p></div>
+                            <div class="concept-card"><h4>Hash tables</h4><p>Fast lookups based on keys and hash functions.</p></div>
+                            <div class="concept-card"><h4>Trees</h4><p>Hierarchical structures that model relationships and enable fast searching.</p></div>
+                            <div class="concept-card"><h4>Graphs</h4><p>Networks of nodes and edges used for relationships and route problems.</p></div>
+                        </div>
+                        <div class="deep-dive">
+                            <h3>Big O Notation</h3>
+                            <p>Big O expresses how algorithm performance grows as input size increases. It helps compare structures and algorithms without relying on raw timing results from one machine.</p>
+                            <ul>
+                                <li><strong>O(1):</strong> constant time — access by index or direct lookup.</li>
+                                <li><strong>O(log n):</strong> logarithmic time — binary search.</li>
+                                <li><strong>O(n):</strong> linear time — scan a list once.</li>
+                                <li><strong>O(n log n):</strong> efficient sorting algorithms.</li>
+                                <li><strong>O(n²):</strong> nested loops and simple quadratic processes.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Algorithms</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">Algorithms describe how to solve problems in steps. A good algorithm balances correctness, readability, and efficiency.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>Searching</h4><p>Linear search, binary search, and their trade-offs.</p></div>
+                            <div class="concept-card"><h4>Sorting</h4><p>Merge sort, quick sort, heap sort, and insertion sort.</p></div>
+                            <div class="concept-card"><h4>Recursion</h4><p>Solutions that divide problems into smaller subproblems.</p></div>
+                            <div class="concept-card"><h4>Dynamic programming</h4><p>Memoized optimization for overlapping subproblems.</p></div>
+                            <div class="concept-card"><h4>Greedy algorithms</h4><p>Choosing local optima with the goal of reaching a global optimum.</p></div>
+                            <div class="concept-card"><h4>Graph algorithms</h4><p>BFS, DFS, Dijkstra, and A* for path and connectivity problems.</p></div>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Databases</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">Databases store information so applications can read and write it reliably. They range from relational databases to document stores and graph systems.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>Tables</h4><p>Rows and columns organized into named collections.</p></div>
+                            <div class="concept-card"><h4>Keys</h4><p>Identifiers used to find and relate records.</p></div>
+                            <div class="concept-card"><h4>Indexes</h4><p>Additional lookup structures that improve query speed.</p></div>
+                            <div class="concept-card"><h4>Joins</h4><p>Combine information from multiple related tables.</p></div>
+                            <div class="concept-card"><h4>Transactions</h4><p>Atomic changes that preserve data integrity.</p></div>
+                            <div class="concept-card"><h4>NoSQL</h4><p>Non-relational storage for flexible, high-scale, document-oriented, or distributed workloads.</p></div>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Networking</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">Networking explains how devices communicate over the internet and private systems. It covers protocol layers, addressing, data transfer, and latency management.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>IP</h4><p>Addressing system used to identify devices on a network.</p></div>
+                            <div class="concept-card"><h4>TCP</h4><p>Reliable connection-oriented transport protocol.</p></div>
+                            <div class="concept-card"><h4>UDP</h4><p>Fast, lower-overhead protocol used for time-sensitive traffic.</p></div>
+                            <div class="concept-card"><h4>HTTP</h4><p>Request-response protocol used by browsers and APIs.</p></div>
+                            <div class="concept-card"><h4>DNS</h4><p>Translation between human-readable names and machine-readable IP addresses.</p></div>
+                            <div class="concept-card"><h4>WebSockets</h4><p>Persistent two-way connection useful for live messaging and multiplayer systems.</p></div>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Software Engineering</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">Software engineering focuses on producing maintainable, reliable, scalable systems over time. It includes version control, architecture, testing, deployment, and automation.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>Git</h4><p>Version control system that tracks changes and supports collaboration.</p></div>
+                            <div class="concept-card"><h4>Pull requests</h4><p>Code review workflows used to evaluate changes before merging.</p></div>
+                            <div class="concept-card"><h4>Testing</h4><p>Unit, integration, and end-to-end checks that reduce risk.</p></div>
+                            <div class="concept-card"><h4>Refactoring</h4><p>Improving internal structure without changing behavior.</p></div>
+                            <div class="concept-card"><h4>Technical debt</h4><p>Short-term shortcuts that create future maintenance costs.</p></div>
+                            <div class="concept-card"><h4>CI/CD</h4><p>Automating validation, testing, and deployment of software changes.</p></div>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Cybersecurity</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">Cybersecurity is the practice of defending systems and information from unauthorized access, misuse, or damage. It is a core part of modern software engineering.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>Authentication</h4><p>Verifying who a user or system claims to be.</p></div>
+                            <div class="concept-card"><h4>Authorization</h4><p>Determining what an authenticated user is allowed to do.</p></div>
+                            <div class="concept-card"><h4>Hashing</h4><p>One-way transformations used to protect sensitive data and verify integrity.</p></div>
+                            <div class="concept-card"><h4>Encryption</h4><p>Converting readable data into unreadable data without the right key.</p></div>
+                            <div class="concept-card"><h4>HTTPS</h4><p>Secure HTTP using TLS, protecting communication in transit.</p></div>
+                            <div class="concept-card"><h4>Secure coding</h4><p>Designing software to resist common attacks such as injection, abuse of trust, and unsafe data handling.</p></div>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>AI & Machine Learning</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">AI and machine learning focus on training systems to detect patterns, predict outcomes, classify information, and automate decisions based on data.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>Features</h4><p>Inputs used to describe a training example or prediction target.</p></div>
+                            <div class="concept-card"><h4>Models</h4><p>Mathematical structures that learn patterns from data.</p></div>
+                            <div class="concept-card"><h4>Training</h4><p>Adjusting model parameters to reduce error on examples.</p></div>
+                            <div class="concept-card"><h4>Classification</h4><p>Assigning a label to input based on learned patterns.</p></div>
+                            <div class="concept-card"><h4>Neural networks</h4><p>Layered mathematical systems capable of modeling complex patterns.</p></div>
+                            <div class="concept-card"><h4>Transformers</h4><p>Models used heavily in language processing, embeddings, and attention-based architectures.</p></div>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Advanced Topics</summary>
+                    <div class="topic-body">
+                        <p class="topic-overview">Advanced topics involve deeper system and architecture concerns that matter in large, high-scale, performance-sensitive, or highly distributed software projects.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card"><h4>Distributed systems</h4><p>Applications spread across many machines that communicate over a network.</p></div>
+                            <div class="concept-card"><h4>Concurrency</h4><p>Multiple tasks making progress in overlapping time windows.</p></div>
+                            <div class="concept-card"><h4>Parallelism</h4><p>Doing work simultaneously across multiple execution resources.</p></div>
+                            <div class="concept-card"><h4>Compilers</h4><p>Translate source code into executable or lower-level instructions.</p></div>
+                            <div class="concept-card"><h4>Virtual machines</h4><p>Abstraction layers that sandbox or emulate runtime environments.</p></div>
+                            <div class="concept-card"><h4>Rendering pipelines</h4><p>Conversion of scene data into screen output in graphics engines and simulations.</p></div>
+                        </div>
+                    </div>
+                </details>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="brand-wrap">
+                        <img src="assets/openworlds-logo.png" alt="OpenWorlds logo" class="ow-logo">
+                        <h4>OpenWorlds</h4>
+                    </div>
+                    <p>Empowering creators worldwide</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="learning.html">Learning Center</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="community.html">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="https://discord.gg/TRJ8ZmBKDS"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.youtube.com/@Official-OpenWorlds"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 OpenWorlds. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById('librarySearch');
+        const cards = document.querySelectorAll('.category-card');
+        const details = document.querySelectorAll('details');
+
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase().trim();
+
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                const visible = !query || text.includes(query);
+                card.style.display = visible ? 'block' : 'none';
+            });
+
+            details.forEach(detail => {
+                const text = detail.textContent.toLowerCase();
+                const shouldShow = !query || text.includes(query);
+                detail.style.display = shouldShow ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
